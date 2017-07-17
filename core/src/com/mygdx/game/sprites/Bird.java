@@ -49,7 +49,10 @@ public class Bird {
     }
 
     public Rectangle getBounds() {
-        Gdx.app.debug("Bird.getBounds - return birds collider", bounds.toString());
         return bounds;
+    }
+
+    public void dispose() {
+        bird.dispose();
     }
 }

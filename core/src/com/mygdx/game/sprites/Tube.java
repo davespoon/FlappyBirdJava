@@ -19,7 +19,7 @@ public class Tube {
     private Texture topTube, bottomTube;
     private Vector2 posTopTube, posBottomTube;
     private Random rand;
-    private static Rectangle boundsTop, boundsBottom;
+    private Rectangle boundsTop, boundsBottom;
 
 
     public Tube(float x) {
@@ -30,7 +30,6 @@ public class Tube {
         posTopTube = new Vector2(x, rand.nextInt(FLUCTUATION) + TUBE_GAP + LOWEST_OPENING);
         posBottomTube = new Vector2(x, posTopTube.y - TUBE_GAP - bottomTube.getHeight());
         boundsTop = new Rectangle(posTopTube.x, posTopTube.y, topTube.getWidth(), topTube.getHeight());
-        Gdx.app.debug("Tube.Tube - boundsTop is:", boundsTop.toString());
         boundsBottom = new Rectangle(posBottomTube.x, posBottomTube.y, bottomTube.getWidth(), bottomTube.getHeight());
     }
 
@@ -58,8 +57,11 @@ public class Tube {
     }
 
     public boolean collides(Rectangle player) {
-        Gdx.app.debug("Tube.collides - Return true bird collides with TopTube", String.valueOf(player.overlaps(boundsTop)));
-        Gdx.app.debug("Tube.collides - Return true bird collides with BottomTube", String.valueOf(player.overlaps(boundsBottom)));
         return player.overlaps(boundsTop) || player.overlaps(boundsBottom);
+    }
+
+    public void dispose() {
+        topTube.dispose();
+        bottomTube.dispose();
     }
 }
